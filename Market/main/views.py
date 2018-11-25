@@ -21,7 +21,10 @@ def register(request):
         username = request.data.get("username")
         email = request.data.get("email")
         password = request.data.get("password")
-        User.objects.create(username=username, email=email, password=password)
+        User.objects.create(username=username, email=email)
+        user = User.objects.get(username=username)
+        User.set_password(user, raw_password=password)
+        user.save()
         return Response(serializer.data, status = status.HTTP_201_CREATED)
     return Response({"errors": "Invalid data"})
 
