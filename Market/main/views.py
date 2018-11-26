@@ -54,7 +54,7 @@ def brandList(request):
 def categoryList(request):
     paginator = LimitOffsetPagination()
     paginator.page_size = 10
-    cats = Brand.objects.all()
+    cats = Category.objects.all()
     result_page = paginator.paginate_queryset(cats, request)
     serializer = CategorySerializer(result_page, many=True)
     return paginator.get_paginated_response(serializer.data)
@@ -80,8 +80,8 @@ class ProductDetailsForUser(generics.RetrieveUpdateDestroyAPIView):
     authentication_classes = (JSONWebTokenAuthentication,)
 
     def get_object(self):
-        if self.get_object().is_owner(self.request):
-            return Product.objects.get(pk=self.kwargs['pk'])
+        return Product.objects.filter(user=self.request.user).get(id=self.kwargs['pk'])
+
 
     def perform_update(self, serializer):
         if self.get_object().is_owner(self.request):
@@ -149,14 +149,14 @@ class CategoryProducts(generics.ListAPIView):
     serializer_class = ProductSerializer
 
     def get_queryset(self):
-        return Category.objects.get(pk=self.kwargs['fk']).products
+        return Product.objects.filter(category=Category.objects.get(pk=self.kwargs['fk']))
 
 class BrandProducts(generics.ListAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
     def get_queryset(self):
-        return Brand.objects.get(pk=self.kwargs['fk']).products
+        return Product.objects.filter(brand=Brand.objects.get(pk=self.kwargs['fk']))
 
 
 class ProductDetails(generics.RetrieveAPIView):
