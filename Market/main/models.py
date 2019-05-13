@@ -46,8 +46,14 @@ class Order(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders')
 
+    objects = OrderManager()
+
     def is_owner(self, request):
         return self.user.id == request.user.id
 
     def __str__(self):
         return self.product
+
+class OrderManager(models.Manager):
+    def for_user(self, user):
+        return self.filter(user = user)

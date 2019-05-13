@@ -10,7 +10,7 @@ from rest_framework.decorators import api_view, authentication_classes, permissi
 from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.views import APIView
 from .models import Category, Brand, Product, Comment
-from .serializers import CategorySerializer, BrandSerializer, ProductSerializer, CommentSerializer, UserSerializer
+from .serializers import CategorySerializer, BrandSerializer, ProductSerializer, CommentSerializer, UserSerializer, OrderSerializer
 from django.contrib.auth.models import User
 
 # Create your views here.
@@ -204,3 +204,14 @@ class CommentDetails(generics.RetrieveUpdateDestroyAPIView):
     def perform_destroy(self, instance):
         if self.get_object().is_owner(self.request):
             instance.delete()
+
+class OrderList(APIView):
+    def get(self, request):
+        orders = self.objects.for_user(request.user)
+        serializer = OrderSerializer(orders, many=True)
+        return Response(serializer.data)
+
+class OrderCreate(APIView):
+    def post(self, request, pk):
+        order = Order(user=request.user, product=Product.objects.get(id=pk))
+        order.save()
