@@ -1,0 +1,19 @@
+<ng-container>
+  <div class="mt-5">
+    <div class="form-group">
+      <label>Username</label>
+      <input type="text" class="form-control w-25" placeholder="Enter username" [(ngModel)]="username">
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" class="form-control w-25" placeholder="Password" [(ngModel)]="password">
+    </div>
+    <div>
+      <a a routerLink="/task_list">
+        <button type="submit" class="btn btn-primary mb-2" (click)="login()">
+        Log in
+      </button>
+      </a>
+    </div>
+  </div>
+</ng-container>
