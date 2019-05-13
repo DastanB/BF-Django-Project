@@ -15,6 +15,22 @@ from django.contrib.auth.models import User
 
 # Create your views here.
 @api_view(['POST'])
+def login(request):
+    username = request.data.get('username')
+    password = request.data.get('password')
+    user = authenticate(username = username, password = password)
+    if user is None:
+        return Response({'error': 'Invalid data'})
+
+    token, created = Token.objects.get_or_create(user=user)
+    return Response({'token': token.key})
+
+@api_view(['POST'])
+def logout(request):
+    request.auth.delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['POST'])
 def register(request):
     serializer = UserSerializer(data=request.data)
     if serializer.is_valid():
@@ -37,33 +53,30 @@ def productList(request):
     paginator = LimitOffsetPagination()
     paginator.page_size = 10
     prods = Product.objects.all()
-    result_page = paginator.paginate_queryset(prods, request)
-    serializer = ProductSerializer(result_page, many=True)
-    return paginator.get_paginated_response(serializer.data)
+    serializer = ProductSerializer(prods, many=True)
+    return Response(serializer.data)
 
 @api_view(['GET'])
 def brandList(request):
     paginator = LimitOffsetPagination()
     paginator.page_size = 10
     brands = Brand.objects.all()
-    result_page = paginator.paginate_queryset(brands, request)
-    serializer = BrandSerializer(result_page, many=True)
-    return paginator.get_paginated_response(serializer.data)
+    serializer = BrandSerializer(brands, many=True)
+    return Response(serializer.data)
 
 @api_view(['GET'])
 def categoryList(request):
     paginator = LimitOffsetPagination()
     paginator.page_size = 10
     cats = Category.objects.all()
-    result_page = paginator.paginate_queryset(cats, request)
-    serializer = CategorySerializer(result_page, many=True)
-    return paginator.get_paginated_response(serializer.data)
+    serializer = CategorySerializer(cats, many=True)
+    return Response(serializer.data)
 
 class ProductListForUser(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     permission_classes = (IsAuthenticated,)
-    authentication_classes = (JSONWebTokenAuthentication,)
+    authentication_classes = (TokenAuthentication,)
 
     def get_queryset(self):
         return Product.objects.filter(user=self.request.user)
@@ -77,7 +90,7 @@ class ProductDetailsForUser(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     permission_classes = (IsAuthenticated,)
-    authentication_classes = (JSONWebTokenAuthentication,)
+    authentication_classes = (TokenAuthentication,)
 
     def get_object(self):
         return Product.objects.filter(user=self.request.user).get(id=self.kwargs['pk'])
@@ -100,7 +113,7 @@ class CategoryCreate(generics.CreateAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     permission_classes = (IsAdminUser,)
-    authentication_classes = (JSONWebTokenAuthentication,)
+    authentication_classes = (TokenAuthentication,)
 
 class CategoryDetails(generics.RetrieveAPIView):
     queryset = Category.objects.all()
@@ -110,13 +123,13 @@ class CategoryUpdate(generics.UpdateAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     permission_classes = (IsAdminUser,)
-    authentication_classes = (JSONWebTokenAuthentication,)
+    authentication_classes = (TokenAuthentication,)
 
 class CategoryDelete(generics.DestroyAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     permission_classes = (IsAdminUser,)
-    authentication_classes = (JSONWebTokenAuthentication,)
+    authentication_classes = (TokenAuthentication,)
 
 class BrandList(generics.ListAPIView):
     queryset = Brand.objects.all()
@@ -126,7 +139,7 @@ class BrandCreate(generics.CreateAPIView):
     queryset = Brand.objects.all()
     serializer_class = BrandSerializer
     permission_classes = (IsAdminUser,)
-    authentication_classes = (JSONWebTokenAuthentication,)
+    authentication_classes = (TokenAuthentication,)
 
 class BrandDetails(generics.RetrieveAPIView):
     queryset = Brand.objects.all()
@@ -136,13 +149,13 @@ class BrandUpdate(generics.UpdateAPIView):
     queryset = Brand.objects.all()
     serializer_class = BrandSerializer
     permission_classes = (IsAdminUser,)
-    authentication_classes = (JSONWebTokenAuthentication,)
+    authentication_classes = (TokenAuthentication,)
 
 class BrandDelete(generics.DestroyAPIView):
     queryset = Brand.objects.all()
     serializer_class = BrandSerializer
     permission_classes = (IsAdminUser,)
-    authentication_classes = (JSONWebTokenAuthentication,)
+    authentication_classes = (TokenAuthentication,)
 
 class CategoryProducts(generics.ListAPIView):
     queryset = Product.objects.all()
@@ -170,7 +183,7 @@ class CommentList(generics.ListCreateAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     permission_classes = (IsAuthenticated,)
-    authentication_classes = (JSONWebTokenAuthentication,)
+    authentication_classes = (TokenAuthentication,)
 
     def get_queryset(self):
         return Comment.objects.filter(product=Product.objects.get(id=self.kwargs["fk"]))
@@ -182,7 +195,7 @@ class CommentDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     permission_classes = (IsAuthenticated,)
-    authentication_classes = (JSONWebTokenAuthentication,)
+    authentication_classes = (TokenAuthentication,)
 
     def perform_update(self, serializer):
         if self.get_object().is_owner(self.request):

@@ -3,8 +3,9 @@ from django.urls import path, include
 from . import views
 from rest_framework_jwt.views import obtain_jwt_token
 urlpatterns = [
-    path('login/', obtain_jwt_token),
+    path('login/', views.login),
     path('register/', views.register),
+    path('logout/', views.logout),
 
     path('', views.productList),
     path('<int:pk>/', views.ProductDetails.as_view()),
