@@ -1,19 +1,37 @@
-    
-export interface TaskList {
+
+export interface ICategory {
     id: number;
     name: string;
-    owner :IUser;
+
   }
-  
-  export interface Task {
+
+  export interface IBrand {
+      id: number;
+      name: string;
+
+    }
+
+export interface IProduct{
     id: number;
     name: string;
-    created_at:string;
-    due_on:string;
-    status:string;
-    task_list:TaskList;
-    owner :IUser;
+    price: number;
+    category:Category;
+    brand: Brand;
+    user :IUser;
   }
+
+export interface IComment {
+    id: number;
+    message: string;
+    product: Product;
+    user :IUser;
+    }
+
+export interface IOrder {
+    id: number;
+    product: Product;
+    user :IUser;
+    }
 
 export interface IAuthResponse {
     token: string;
