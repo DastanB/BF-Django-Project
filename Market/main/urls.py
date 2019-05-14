@@ -3,6 +3,8 @@ from django.urls import path, include
 from . import views
 from rest_framework_jwt.views import obtain_jwt_token
 urlpatterns = [
+    path('welcome/', views.welcome),
+
     path('login/', views.login),
     path('register/', views.register),
     path('logout/', views.logout),
@@ -36,5 +38,6 @@ urlpatterns = [
     path('brands/<int:ffk>/products/<int:fk>/comments/<int:pk>/', views.CommentDetails.as_view()),
 
     path('orders/', views.OrderList.as_view()),
+    path('orders/<int:pk>/', views.OrderDelete.as_view()),
     path('orders/product/<int:pk>/', views.OrderCreate.as_view()),
 ]

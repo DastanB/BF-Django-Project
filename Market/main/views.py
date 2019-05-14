@@ -9,11 +9,7 @@ from rest_framework import generics
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.views import APIView
-<<<<<<< HEAD
 from .models import Category, Brand, Product, Comment, Order
-=======
-from .models import Category, Brand, Product, Comment
->>>>>>> cfdb1ad131d758dde23146857a5c2a7e781fba27
 from .serializers import CategorySerializer, BrandSerializer, ProductSerializer, CommentSerializer, UserSerializer, OrderSerializer
 from django.contrib.auth.models import User
 
@@ -209,7 +205,6 @@ class CommentDetails(generics.RetrieveUpdateDestroyAPIView):
         if self.get_object().is_owner(self.request):
             instance.delete()
 
-<<<<<<< HEAD
 @permission_classes((IsAuthenticated,))
 @authentication_classes((TokenAuthentication, ))
 class OrderList(APIView):
@@ -218,6 +213,16 @@ class OrderList(APIView):
         serializer = OrderSerializer(orders, many=True)
         return Response(serializer.data)
 
+class OrderDelete(generics.DestroyAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+    permission_classes = (IsAuthenticated,)
+    authentication_classes = (TokenAuthentication,)
+
+    def perform_destroy(self, instance):
+        if self.get_object().is_owner(self.request):
+            instance.delete()   
+
 @permission_classes((IsAuthenticated,))
 @authentication_classes((TokenAuthentication, ))
 class OrderCreate(APIView):
@@ -225,15 +230,7 @@ class OrderCreate(APIView):
         order = Order(user = request.user, product = Product.objects.get(id=pk))
         order.save()
         return Response(OrderSerializer(order).data)
-=======
-class OrderList(APIView):
-    def get(self, request):
-        orders = self.objects.for_user(request.user)
-        serializer = OrderSerializer(orders, many=True)
-        return Response(serializer.data)
 
-class OrderCreate(APIView):
-    def post(self, request, pk):
-        order = Order(user=request.user, product=Product.objects.get(id=pk))
-        order.save()
->>>>>>> cfdb1ad131d758dde23146857a5c2a7e781fba27
+def welcome(request):
+    if request.method == 'GET':
+        return render(request, 'main/index.html')
