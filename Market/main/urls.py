@@ -34,4 +34,7 @@ urlpatterns = [
     path('brands/<int:fk>/products/<int:pk>/', views.ProductDetails.as_view()),
     path('brands/<int:ffk>/products/<int:fk>/comments/', views.CommentList.as_view()),
     path('brands/<int:ffk>/products/<int:fk>/comments/<int:pk>/', views.CommentDetails.as_view()),
+
+    path('orders/', views.OrderList.as_view()),
+    path('orders/product/<int:pk>/', views.OrderCreate.as_view()),
 ]

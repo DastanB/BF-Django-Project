@@ -48,4 +48,4 @@ class OrderSerializer(ModelSerializer):
     user = UserSerializer(read_only=True)
     class Meta:
         model = Order
-        fields = ['message', 'product', 'user']
+        fields = ['product', 'user']
