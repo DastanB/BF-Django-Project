@@ -9,6 +9,7 @@ import { BrandsComponent } from './brands/brands.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductCommentComponent } from './product-comment/product-comment.component';
 import { BasketComponent } from './basket/basket.component';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
   {path: '', component: IndexComponent },
@@ -18,12 +19,14 @@ const routes: Routes = [
   {path: 'categories' , component: CategoriesComponent},
   {path: 'brands', component: BrandsComponent},
   {path: 'products', component: ProductsComponent},
-  {path: 'product-comment', component: ProductCommentComponent},
-  {path: 'basket', component:BasketComponent}
+  {path: 'product-comment/:id', component: ProductCommentComponent},
+  {path: 'basket', component:BasketComponent},
+  {path: 'categories/:id/products' , component: ProductsComponent},
+  {path: 'brands/:id/products' , component: ProductsComponent},
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes) , HttpClientModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

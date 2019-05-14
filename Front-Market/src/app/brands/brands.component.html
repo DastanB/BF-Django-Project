@@ -33,55 +33,15 @@
                           </tr>
                       </thead>
                       <tbody>
-
-                          <tr class="bg-white">
+                          <tr *ngFor = "let brand of brands" class="bg-white">
                               <th scope="row">
-                                  <a variant="outline-success" class="media align-items-center" routerLink="/products" routerLinkActive="active" >
+                                  <a variant="outline-success" class="media align-items-center" routerLink="/brands/{{brand.id}}/products/" routerLinkActive="active" >
                                       <img alt="Image" src="assets/img/graphic-developer-bootstrap.png" class="avatar" />
                                       <div class="media-body">
-                                          <span class="h6 mb-0">GUCCI
+                                          <span class="h6 mb-0">{{brand.name}}
                                           </span>
                                       </div>
                                     </a>
-                              </th>
-                              <td>daniel.cameron@wingman.co</td>
-                          </tr>
-                          <tr class="table-divider"></tr>
-                          <tr class="bg-white">
-                              <th scope="row">
-                                  <a variant="outline-success" class="media align-items-center" routerLink="/products" routerLinkActive="active">
-                                      <img alt="Image" src="assets/img/graphic-developer-bootstrap.png" class="avatar" />
-                                      <div class="media-body">
-                                          <span class="h6 mb-0">ARMANI
-                                          </span>
-                                      </div>
-                                  </a>
-                              </th>
-                              <td>daniel.cameron@wingman.co</td>
-                          </tr>
-                          <tr class="table-divider"></tr>
-                          <tr class="bg-white">
-                              <th scope="row">
-                                  <a variant="outline-success" class="media align-items-center" routerLink="/products" routerLinkActive="active">
-                                      <img alt="Image" src="assets/img/graphic-developer-bootstrap.png" class="avatar" />
-                                      <div class="media-body">
-                                          <span class="h6 mb-0">BALENCIAGA
-                                          </span>
-                                      </div>
-                                  </a>
-                              </th>
-                              <td>daniel.cameron@wingman.co</td>
-                          </tr>
-                          <tr class="table-divider"></tr>
-                          <tr class="bg-white">
-                              <th scope="row">
-                                  <a variant="outline-success" class="media align-items-center" routerLink="/products" routerLinkActive="active">
-                                      <img alt="Image" src="assets/img/graphic-developer-bootstrap.png" class="avatar" />
-                                      <div class="media-body">
-                                          <span class="h6 mb-0">DIOR
-                                          </span>
-                                      </div>
-                                  </a>
                               </th>
                               <td>daniel.cameron@wingman.co</td>
                           </tr>

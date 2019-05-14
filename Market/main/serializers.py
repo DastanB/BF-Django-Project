@@ -34,18 +34,18 @@ class ProductSerializer(ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ['category', 'brand', 'user', 'name', 'price',]
+        fields = ['id' , 'category', 'brand', 'user', 'name', 'price',]
 
 class CommentSerializer(ModelSerializer):
     product = ProductSerializer(read_only=True)
     user = UserSerializer(read_only=True)
     class Meta:
         model = Comment
-        fields = ['message', 'product', 'user']
+        fields = ['id' , 'message', 'product', 'user']
 
 class OrderSerializer(ModelSerializer):
     product = ProductSerializer(read_only=True)
     user = UserSerializer(read_only=True)
     class Meta:
         model = Order
-        fields = ['product', 'user']
+        fields = ['id' , 'product', 'user']

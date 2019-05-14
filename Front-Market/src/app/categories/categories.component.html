@@ -34,58 +34,19 @@
                         </thead>
                         <tbody>
   
-                            <tr class="bg-white">
+                            <tr class="bg-white" *ngFor = "let category of categories">
                                 <th scope="row">
-                                    <a variant="outline-success" class="media align-items-center" routerLink="/products" routerLinkActive="active">
-                                        <img alt="Image" src="assets/img/graphic-developer-gulp.png" class="avatar" />
+                                    <a variant="outline-success" class="media align-items-center" routerLink="/categories/{{category.id}}/products" routerLinkActive="active">
                                         <div class="media-body">
-                                            <span class="h6 mb-0">Footwear
+                                            <span class="h6 mb-0">{{category.name}}
                                             </span>
                                         </div>
                                     </a>
                                 </th>
                                 <td>daniel.cameron@wingman.co</td>
                             </tr>
-                            <tr class="table-divider"></tr>
-                            <tr class="bg-white">
-                                <th scope="row">
-                                    <a variant="outline-success" class="media align-items-center" routerLink="/products" routerLinkActive="active">
-                                        <img alt="Image" src="assets/img/graphic-developer-gulp.png" class="avatar" />
-                                        <div class="media-body">
-                                            <a class="h6 mb-0" href="products">Outerwear
-                                            </a>
-                                        </div>
-                                    </a>
-                                </th>
-                                <td>daniel.cameron@wingman.co</td>
-                            </tr>
-                            <tr class="table-divider"></tr>
-                            <tr class="bg-white">
-                                <th scope="row">
-                                    <a variant="outline-success" class="media align-items-center" routerLink="/products" routerLinkActive="active">
-                                        <img alt="Image" src="assets/img/graphic-developer-gulp.png" class="avatar" />
-                                        <div class="media-body">
-                                            <span class="h6 mb-0">Underwear
-                                            </span>
-                                        </div>
-                                    </a>
-                                </th>
-                                <td>daniel.cameron@wingman.co</td>
-                            </tr>
-                            <tr class="table-divider"></tr>
-                            <tr class="bg-white">
-                                <th scope="row">
-                                    <a variant="outline-success" class="media align-items-center" routerLink="/products" routerLinkActive="active">
-                                        <img alt="Image" src="assets/img/graphic-developer-gulp.png" class="avatar" />
-                                        <div class="media-body">
-                                            <span class="h6 mb-0">Accessories
-                                            </span>
-                                        </div>
-                                    </a>
-                                </th>
-                                <td>daniel.cameron@wingman.co</td>
-                            </tr>
-                            <tr class="table-divider"></tr>
+                            <tr class="table-divider" *ngFor = "let c of categories"></tr>
+
                                                         
                         </tbody>
                     </table>

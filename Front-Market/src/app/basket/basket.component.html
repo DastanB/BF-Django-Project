@@ -34,58 +34,23 @@
                         </thead>
                         <tbody>
   
-                            <tr class="bg-white">
+                            <tr class="bg-white" *ngFor = "let o of orders">
                                 <th scope="row">
                                     <a variant="outline-success" class="media align-items-center" routerLink="/products" routerLinkActive="active" >
                                         <img alt="Image" src="assets/img/graphic-developer-bootstrap.png" class="avatar" />
                                         <div class="media-body">
-                                            <span class="h6 mb-0">GUCCI
-                                            </span>
+                                            <span class="h6 mb-0">{{o.product.name}}</span>
                                         </div>
                                       </a>
                                 </th>
-                                <td>daniel.cameron@wingman.co</td>
+                                <td >daniel.cameron@wingman.co</td>
+                                <td>
+                                    <button class = "btn btn-primary" (click) = "deleteOrder(o)">
+                                        Delete order
+                                    </button>
+                                </td>
                             </tr>
-                            <tr class="table-divider"></tr>
-                            <tr class="bg-white">
-                                <th scope="row">
-                                    <a variant="outline-success" class="media align-items-center" routerLink="/products" routerLinkActive="active">
-                                        <img alt="Image" src="assets/img/graphic-developer-bootstrap.png" class="avatar" />
-                                        <div class="media-body">
-                                            <span class="h6 mb-0">ARMANI
-                                            </span>
-                                        </div>
-                                    </a>
-                                </th>
-                                <td>daniel.cameron@wingman.co</td>
-                            </tr>
-                            <tr class="table-divider"></tr>
-                            <tr class="bg-white">
-                                <th scope="row">
-                                    <a variant="outline-success" class="media align-items-center" routerLink="/products" routerLinkActive="active">
-                                        <img alt="Image" src="assets/img/graphic-developer-bootstrap.png" class="avatar" />
-                                        <div class="media-body">
-                                            <span class="h6 mb-0">ARMANI
-                                            </span>
-                                        </div>
-                                    </a>
-                                </th>
-                                <td>daniel.cameron@wingman.co</td>
-                            </tr>
-                            <tr class="table-divider"></tr>
-                            <tr class="bg-white">
-                                <th scope="row">
-                                    <a variant="outline-success" class="media align-items-center" routerLink="/products" routerLinkActive="active">
-                                        <img alt="Image" src="assets/img/graphic-developer-bootstrap.png" class="avatar" />
-                                        <div class="media-body">
-                                            <span class="h6 mb-0">ARMANI
-                                            </span>
-                                        </div>
-                                    </a>
-                                </th>
-                                <td>daniel.cameron@wingman.co</td>
-                            </tr>
-                            <tr class="table-divider"></tr>
+                            <tr *ngFor = "let o of orders" class="table-divider"></tr>
                                                         
                         </tbody>
                     </table>

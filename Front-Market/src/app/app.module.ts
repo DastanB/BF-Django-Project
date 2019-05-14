@@ -12,6 +12,9 @@ import { BrandsComponent } from './brands/brands.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductCommentComponent } from './product-comment/product-comment.component';
 import { BasketComponent } from './basket/basket.component';
+import { FormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import {AuthInterceptor} from './AuthInterceptor';
 
 @NgModule({
   declarations: [
@@ -28,9 +31,16 @@ import { BasketComponent } from './basket/basket.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
