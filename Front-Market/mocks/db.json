@@ -1,0 +1,72 @@
+{
+  "faculties": [
+    {
+      "id": 1,
+      "name": "FIT",
+      "description": "Just code IT."
+    },
+    {
+      "id": 2,
+      "name": "BS",
+      "description": "Money is the power."
+    },
+    {
+      "id": 3,
+      "name": "ISE",
+      "description": "Only the strongest survive."
+    },
+    {
+      "id": 4,
+      "name": "KMA",
+      "description": "bla bla."
+    },
+    {
+      "id": 5,
+      "name": "SCE",
+      "description": "Chemistry lalala"
+    },
+    {
+      "id": 6,
+      "name": "FEOGI",
+      "description": "Oil bla bla bla"
+    },
+    {
+      "id": 7,
+      "name": "MCM",
+      "description": "Math la la la"
+    }
+  ],
+  "teachers": [
+    {
+      "id": 1,
+      "name": "Lalala",
+      "surname": "Lalala",
+      "midlename": "Lalala",
+      "faculty": 1
+    },
+    {
+      "id": 2,
+      "name": "Lalala",
+      "surname": "Lalala",
+      "midlename": "Lalala",
+      "faculty": 1
+    },
+    {
+      "id": 3,
+      "name": "Lalala",
+      "surname": "Lalala",
+      "midlename": "Lalala",
+      "faculty": 2
+    },
+    {
+      "id": 4,
+      "name": "Lalala",
+      "surname": "Lalala",
+      "midlename": "Lalala",
+      "faculty": 5
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

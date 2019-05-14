@@ -1,0 +1,74 @@
+<div class="navbar-container">
+  <div class="bg-dark navbar-dark" data-sticky="top">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" routerLink="/" routerLinkActive="active">
+          <img alt="Wingman" src="assets/img/logo-white.svg" />
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="icon-menu h4"></i>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+          <ul *ngIf="isLoggedIn" class="navbar-nav">
+              <li class="nav-item">
+                  <a routerLink="/" routerLinkActive="active" class="nav-link">Home</a>
+              </li>
+              <li class="nav-item">
+                <a routerLink="/brands" routerLinkActive="active" class="nav-link">Brands</a>
+            </li>
+              <li class="nav-item">
+                  <a routerLink="/categories"  routerLinkActive="active" class="nav-link">Categories</a>
+              </li>
+          </ul>
+          <ul *ngIf="isLoggedIn" class="navbar-nav">
+              <a class="navbar-brand" routerLink="/basket" routerLinkActive="active">
+                  <img alt="Wingman" src="assets/img/images.png" width="40" height="40"/>
+                </a>
+              <li class="nav-item">
+                  <a routerLink="/" routerLinkActive="active">Log out</a>
+                 
+              </li>
+          </ul>
+
+          <ul *ngIf="!isLoggedIn"></ul>
+          <ul *ngIf="!isLoggedIn" class="navbar-nav">
+              <li class="nav-item">
+                  <a routerLink="/register"  routerLinkActive="active">Sign up</a>
+                  <span>&nbsp;or&nbsp;</span><a routerLink="/login"  routerLinkActive="active">Sign in</a>
+              </li>
+          </ul>
+
+        </div>
+        <!--end nav collapse-->
+        
+      </nav>
+    </div>
+    <!--end of container-->
+  </div>
+</div>
+
+<router-outlet></router-outlet>
+
+<footer class="bg-gray text-light footer-long">
+  <div class="container">
+      <div class="row">
+          <div class="col-12 col-md-3">
+              <img alt="Image" src="assets/img/logo-white.svg" class="mb-4" />
+              <p class="text-muted">
+                  &copy; 2019 Almaty
+                  <br />KBTU students' rights
+              </p>
+          </div>
+          <!--end of col-->
+          <div class="col-12 col-md-9">
+              <span class="h5">Contact us if you want to order. Tel: +7(777)-210-7915</span>
+              <!--end of row-->
+          </div>
+          <!--end of col-->
+      </div>
+      <!--end of row-->
+  </div>
+  <!--end of container-->
+</footer>
+
+
