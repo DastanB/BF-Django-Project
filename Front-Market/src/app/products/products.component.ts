@@ -16,6 +16,7 @@ export class ProductsComponent implements OnInit {
   public all: boolean = true;
   public products: Product[] = [];
   public categoryOrBrand: boolean = true;
+  public isLoggedIn: boolean = false;
 
   constructor(private route: ActivatedRoute , private router: Router , private provider: ProviderService , private auth_: AuthService) { }
 
@@ -30,6 +31,12 @@ export class ProductsComponent implements OnInit {
       else{
         this.categoryOrBrand = false;
       }
+    }
+    if(localStorage.getItem('token')){
+      this.isLoggedIn = true;
+    }
+    else {
+      this.isLoggedIn = false;
     }
     this.getProducts();
   }

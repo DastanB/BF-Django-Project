@@ -23,14 +23,14 @@ export class AuthService extends MainService {
   }
 
   register(username: any, password: any, email: any): Promise<IUser>{
-    return this.post('http://localhost:8000/api/register/', {
+    return this.post('http://localhost:8000/register/', {
       username: username,
       password: password,
       email: email
     })
   }
   logout(): void {
-    this.post('http://localhost:8000/api/logout/', {}).then(() => {
+    this.post('http://localhost:8000/logout/', {}).then(() => {
       localStorage.clear();
     // this.token = ''
     });

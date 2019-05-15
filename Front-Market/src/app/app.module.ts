@@ -15,6 +15,7 @@ import { BasketComponent } from './basket/basket.component';
 import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import {AuthInterceptor} from './AuthInterceptor';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {AuthInterceptor} from './AuthInterceptor';
     BrandsComponent,
     ProductsComponent,
     ProductCommentComponent,
-    BasketComponent
+    BasketComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

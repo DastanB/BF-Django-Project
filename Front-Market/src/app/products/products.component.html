@@ -47,13 +47,13 @@
                                     </a>
                               </th>
                               <td>daniel.cameron@wingman.co</td>
-                              <td>
+                              <td *ngIf = "isLoggedIn">
                                   <a variant="outline-success" class="media align-items-center" routerLink="/product-comment/{{product.id}}/" routerLinkActive="active">
                                     Comment
                                 </a>
                               </td>
-                              <td>
-                                  <a variant="outline-success" class="media align-items-center" (click) = "order(product)">
+                              <td *ngIf = "isLoggedIn">
+                                  <a variant="outline-success" class="media align-items-center" (click) = "order(product)" style = "cursor:pointer; color: #59ADE4;">
                                     Buy
                                 </a>
                               </td>

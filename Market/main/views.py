@@ -26,8 +26,11 @@ def login(request):
     return Response({'token': token.key})
 
 @api_view(['POST'])
+@permission_classes((IsAuthenticated,))
+@authentication_classes((TokenAuthentication, ))
 def logout(request):
-    request.auth.delete()
+    print(request.user)
+    request.user.auth_token.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
 
 @api_view(['POST'])
